@@ -23,3 +23,6 @@ Route::resource('/golongan', 'GolonganController');
 Route::resource('/pegawai', 'PegawaiController');
 Route::resource('/lemburkate', 'kategorylemburController');
 Route::resource('/lemburp', 'lemburpegawaiController');
+Route::resource('/tunjangan', 'tunjanganController');
+Route::resource('/tunjangpegawai', 'TunjanganpController');
+Route::resource('/penggajian', 'penggajiansController');

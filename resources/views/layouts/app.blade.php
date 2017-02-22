@@ -55,10 +55,13 @@
                         @else
                          <li><a href="{{ url('/jabatan') }}">Jabatan</a></li>
                           <li><a href="{{ url('/golongan') }}">Golongan</a></li>
-                           <li><a href="{{ url('/pegawai') }}">Pegawai</a>
-                           <li><a href="{{ url('/lemburkate') }}">KategoryLembur</a>
-                            <li><a href="{{ url('/lemburp') }}">LemburPegawai</a>
-                           </li>
+                           <li><a href="{{ url('/pegawai') }}">Pegawai</a></li>
+                           <li><a href="{{ url('/lemburkate') }}">KategoryLembur</a></li>
+                            <li><a href="{{ url('/lemburp') }}">LemburPegawai</a></li>
+                            </li> <li><a href="{{ url('/tunjangan') }}">Tunjangan</a></li>
+                            </li> <li><a href="{{ url('/tunjangpegawai') }}">Tunjangan Pegawai</a></li>
+                             </li> <li><a href="{{ url('/penggajian') }}">Penggajian</a></li>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

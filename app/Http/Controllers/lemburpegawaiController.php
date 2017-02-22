@@ -90,8 +90,9 @@ class lemburpegawaiController extends Controller
     {
         //
         $pegawai=Pegawai::all();
+        $lembur=KategoryLembur::all();
         $lempegawai=LemburPegawai::find($id);
-        return view('lemburpegawai.edit',compact('lempegawai','pegawai'));
+        return view('lemburpegawai.edit',compact('lembur','pegawai','lempegawai'));
     }
 
     /**
@@ -104,42 +105,38 @@ class lemburpegawaiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $lempegawai=LemburPegawai::where('id',$id)->first();
-        if($lempegawai['kode_lembur'] != Request('kode_lembur')){
+         $lempegawai=LemburPegawai::where('id',$id)->first();
+        if($lempegawai['kode_lembur_id']!= Request('kode_lembur_id')){
 
-        $rules=[
-                'kode_lembur'=>'required|unique:lembur_pegawais,kode_lembur',
-                'pegawai_id'=>'required',
-                'jumlah_jam'=>'required',
-                ];
+             $roles=[
+            'kode_lembur_id'=>'required|unique:lembur_pegawais,kode_lembur_id',
+            'pegawai_id'=>'required',
+            'jumlah_jam'=>'required',
+        ];
         }
         else{
-
-        $rules=[
-                'kode_lembur'=>'required',
-                'pegawai_id'=>'required',
-                'jumlah_jam'=>'required',
-                ];
+            $roles=[
+           'kode_lembur_id'=>'required',
+            'pegawai_id'=>'required',
+            'jumlah_jam'=>'required',];
         }
-        $sms=[
-                
-                'kode_lembur.required'=>'SILAHKAN DI ISI',
-                'kode_lembur.unique'=>'SUDAH ADA',
-                'pegawai_id.required'=>'SILAHKAN DI ISI',
-                'jumlah_jam.required'=>'SILAHKAN DI ISI',
-                ];
-        $validasi=Validator::make(Input::all(),$rules,$sms);
+         $sms=[
+            'kode_lembur_id.required'=>'tidak boleh kosong',
+            'kode_lembur_id.unique'=>'tidak boleh sama',
+            'pegawai_id.required'=>'tidak boleh kosong',
+            'jumlah_jam.required'=>'tidak boleh kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$roles,$sms);
         if($validasi->fails()){
-            return redirect()->back()
-            ->WithErrors($validasi)
-            ->WithInput();
+            return redirect()->back()  
+                             ->WithErrors($validasi)
+                    ->WithInput();
         }
-
-        $lempegawaiupdate=Request::all();
+        $update=Request::all();
         $lempegawai=LemburPegawai::find($id);
-        $lempegawai->update($lempegawaipdate);
+        $lempegawai->update($update);
         return redirect('lemburp');
-    }
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -150,7 +147,8 @@ class lemburpegawaiController extends Controller
     public function destroy($id)
     {
         //
-        $lempegawai=LemburPegawai::find($id)->delete();
+         $lempegawai=LemburPegawai::find($id)->delete();
         return redirect('lemburp');
+       
     }
 }

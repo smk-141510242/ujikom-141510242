@@ -11,8 +11,8 @@
                 <div class="panel-body">
 					{!! Form::model($lembur,['method'=>'PATCH','route'=>['lemburkate.update',$lembur->id]])!!}
 						{!! Form::hidden('id',null,['class'=>'form-control']) !!}
-                        <div class="form-group{{ $errors->has('kode_lembur') ? ' has-error' : '' }}">
-                            <label for="kode_lembur" class="col-md-4 control-label">Kode Kategori Lembur</label>
+                          <div class="form-group{{ $errors->has('kode_l') ? ' has-error' : '' }}">
+                            <label for="kode_lembur" class="col-md-4 control-label">Kode Lembur</label>
 
                             <div class="col-md-6">
                                 {!! Form::text('kode_lembur',null,['class'=>'form-control']) !!}

@@ -7,6 +7,7 @@ use App\Pegawai;
 use App\Golongan;
 use App\Jabatan;
 use App\User;
+use App\LemburPegawai;
 use Validator;
 use Input;
 use App\Http\Controllers\Controller;

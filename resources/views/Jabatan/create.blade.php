@@ -24,8 +24,12 @@
 				</div>
 
 				<div class="form-group">
-					<input class="btn btn-success" type="submit" name="submit" value="Tambah">
-				</div>
+                    <div class="col-md-6 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary form-control">
+						Simpan
+                        </button>
+                     </div>
+                </div>
 			</form>
 		</div>
 	</div>
