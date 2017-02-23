@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
-                <div class="panel-heading">Edit Lembur Pegawai</div>
+                <div class="panel-heading">Tunjangan</div>
                 <div class="panel-body">
                    {!! Form::model($tunjangan,['method'=>'PATCH','route'=>['tunjangan.update',$tunjangan->id]])!!}
                         {!! Form::hidden('id',null,['class'=>'form-control']) !!}

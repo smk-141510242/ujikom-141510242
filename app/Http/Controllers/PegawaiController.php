@@ -154,16 +154,12 @@ class PegawaiController extends Controller
     {
         //
         $pegawai=Pegawai::where('id',$id)->first();
-        $user=User::where('id',$pegawai->user_id)->first();
-        if($pegawai['nip'] != Request('nip') || $user['email'] != Request('email')){
+        if($pegawai['nip'] != Request('nip')){
             $roles=[
             'nip'=>'required|unique:pegawais',
             'jabatan_id'=>'required',
             'golongan_id'=>'required',
             'photo'=>'required',
-            'name' => 'required|max:255',
-            'permision' => 'required',
-            'email' => 'required|email|max:255|unique:users',
         ];
         }
         else{
@@ -172,9 +168,6 @@ class PegawaiController extends Controller
             'jabatan_id'=>'required',
             'golongan_id'=>'required',
             'photo'=>'required',
-            'name' => 'required|max:255',
-            'permision' => 'required',
-            'email' => 'required|email|max:255',
         ];
         }
         $sms=[
@@ -183,13 +176,6 @@ class PegawaiController extends Controller
             'jabatan_id.required'=>'jangan kosong',
             'golongan_id.required'=>'jangan kosong',
             'photo.required'=>'jangan kosong',
-            'name.required'=>'jangan kosong',
-            'name.max'=>'max 255',
-            'permision.required'=>'jangan kosong',
-            'email.required'=>'jangan kosong',
-            'email.email'=>'harus berbentuk email',
-            'email.max'=>'max 255',
-            'email.unique'=>'sudah ada',
             
         ];
         $validasi=Validator::make(Input::all(),$roles,$sms);
@@ -198,12 +184,6 @@ class PegawaiController extends Controller
                 ->WithErrors($validasi)
                 ->WithInput();
         }
-        $user=User::find($pegawai->user_id);
-        $user->name = Request('name');
-        $user->type_user = Request('permision');
-        $user->email = Request('email');
-        $user->save();
-        
         $file= Input::file('photo');
         $destination= '/assets/image/';
         $filename=$file->getClientOriginalName();
@@ -213,7 +193,6 @@ class PegawaiController extends Controller
         
             $pegawai =Pegawai::find($id);
             $pegawai->nip = Request('nip');
-            $pegawai->permision = $user->id;
             $pegawai->jabatan_id = Request('jabatan_id');
             $pegawai->golongan_id = Request('golongan_id');
             $pegawai->photo=$filename;

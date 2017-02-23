@@ -11,7 +11,6 @@
 				<thead>
 					<tr class="bg-primary">
 						<th>No</th>
-						<th>No</th>
 						<th>Kode Tunjangan</th>
 						<th>Nama Golongan</th>
 						<th>Nama Jabatan</th>
@@ -30,7 +29,7 @@
 						<td>{{$data->kode_tunjangan}}</td>
 						<td>{{$data->Golongan->nama_golongan}}</td>
 						<td>{{$data->Jabatan->nama_jabatan}}</td>
-						<td>{{$data->besaran_uang}}</td>
+						<td>Rp.{{$data->besaran_uang}}</td>
 						<td>{{$data->status}}</td>
 						<td>{{$data->jumlah_anak}}</td>			
 						<td>

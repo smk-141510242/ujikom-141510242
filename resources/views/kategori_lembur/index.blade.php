@@ -27,7 +27,7 @@
 						<td> {{$lemburs->kode_lembur}} </td>
 						<td> {{$lemburs->Jabatan->nama_jabatan}} </td>
 						<td> {{$lemburs->Golongan->nama_golongan}} </td>
-						<td> {{$lemburs->besaran_uang}} </td>						
+						<td> Rp.{{$lemburs->besaran_uang}} </td>						
 						<td>
 							<a class="btn btn-xs btn-info" href=" {{route('lemburkate.edit', $lemburs->id)}} ">Ubah</a>
 						</td>

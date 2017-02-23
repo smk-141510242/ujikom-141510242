@@ -1,51 +1,76 @@
 @extends('layouts.app')
-
 @section('content')
+			        <div class="col-md-6 col-md-offset-0">
+			            <div class="panel panel-primary">
+			                <div class="panel-heading">Data Pegawai</div>
+			                <div class="panel-body">
+	
+			                	<table border="2" class="table table-success table-border table-hover">
+									<thead >
+										<tr class="bg-primary">
+											<th>No</th>
+											<th>NIP</th>
+											<th>Jabatan</th>
+											<th>Golongan</th>
+											<th>Photo</th>
+											<th colspan="2"><center>Pilihan</center></th>
 
-<div class="container">
-	<div class="panel panel-info">
-		<div class="panel-heading">Jabatan</div>
-		<div class="panel-body">
-		<a class="btn btn-primary" href="{{url('pegawai/create')}}">Tambah Data</a><br><br>
-			<table class="table table-striped table-bordered table-hover">
-				<thead>
-					<tr class="bg-primary">
-						<th>No</th>
-						<th>NIP</th>
-						<th>User ID</th>
-						<th>Jabatan ID</th>
-						<th>Golongan ID</th>
-						<th>Photo</th>
-						<th colspan="3">Pilihan</th>
-					</tr>
-				</thead>
+										</tr>
+									</thead>
+									@php $no=1; @endphp
+									<tbody>
+										@foreach($pegawai as $pegawais)
+										<tr>
+											<td>{{$no++}}</td>
+											<td>{{$pegawais->nip}}</td>
+											<td>{{$pegawais->Jabatan->nama_jabatan}}</td>
+											<td>{{$pegawais->Golongan->nama_golongan}}</td>
+											<td> <img src="assets/image/{{$pegawais->photo}}" width="50" height="50"></td>
+											<td>
+												<a href="{{route('pegawai.edit',$pegawais->id)}}" class='btn btn-warning'> Edit </a>
+											</td>
+											<td>
+												{!! Form::open(['method'=>'DELETE','route'=>['pegawai.destroy',$pegawais->id]]) !!}
+												{!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+												{!! Form::close() !!}
+											</td>				
 
-				<?php $no=1; ?>
-				@foreach ($pegawai as $pegawais)
-				<tbody>
-					<tr> 
-						<td> {{$no++}} </td>
-						<td> {{$pegawais->nip}} </td>
-						<td> {{$pegawais->User->email}} </td>
-						<td> {{$pegawais->Jabatan->kode_jabatan}} </td>
-						<td> {{$pegawais->Golongan->kode_golongan}} </td>
-						<td> <img src="assets/image/{{$pegawais->photo}}" width="50" height="50"></td>						
-						<td>
-							<a class="btn btn-xs btn-info" href=" {{route('pegawai.edit', $pegawais->id)}} ">Ubah</a>
-						</td>
-						<td>
-							<form method="POST" action=" {{route('golongan.destroy', $pegawais->id)}} ">
-								{{csrf_field()}}
-								<input type="hidden" name="_method" value="DELETE">
-								<input class="btn btn-xs btn-danger" onclick="return confirm('Apakah yakin ingin menghapus data ?');" type="submit" value="Hapus">
-							</form>
-						</td>
-					</tr>
-				</tbody>
-				@endforeach
-			</table>
-		</div>
-	</div>
-</div>
-
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-6 ">
+			            <div class="panel panel-primary">
+			                <div class="panel-heading">Data User</div>
+			                <div class="panel-body">
+			                	<table border="2" class="table table-success table-border table-hover">
+									<thead >
+										<tr class="bg-primary">
+											<th>Nama</th>
+											<th>Permission</th>
+											<th>Email</th>
+											
+										</tr>
+									</thead>
+									@php $no=1; @endphp
+									<tbody>
+										@foreach($pegawai as $pegawais)
+										<tr>
+											<td>{{$pegawais->User->name}}</td>
+											<td>{{$pegawais->User->permision}}</td>
+											<td>{{$pegawais->User->email}}</td>
+											
+											
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
+			                </div>
+			            </div>
+			        </div>
+					
+			        <a  href="{{url('pegawai/create')}}" class="btn btn-primary form-control">Tambah</a>
 @endsection

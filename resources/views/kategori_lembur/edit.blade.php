@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
-                <div class="panel-heading">Edit Kategori Lembur</div>
+                <div class="panel-heading">Edit KategoryLembur</div>
                 <div class="panel-body">
 					{!! Form::model($lembur,['method'=>'PATCH','route'=>['lemburkate.update',$lembur->id]])!!}
 						{!! Form::hidden('id',null,['class'=>'form-control']) !!}
