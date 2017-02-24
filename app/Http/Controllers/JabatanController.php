@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Request;
 use App\Jabatan;
 use App\KategoryLembur;
-use App\Http\Requests;
+use Validator;
+use Input;
 
 class JabatanController extends Controller
 {
@@ -34,9 +35,23 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
+       $roles=['kode_jabatan' => 'required|unique:jabatans,kode_jabatan',
+            'nama_jabatan' => 'required','besaran_uang' =>'required'];
+        $sms=[
+            'kode_jabatan.required' => 'Wajib Diisi',
+            'kode_jabatan.unique' => 'Data Sudah Ada',
+            'nama_jabatan.required' => 'Wajib Diisi',
+            'besaran_uang.required' => 'Wajib Diisi',
+            ];
+        $validasi = Validator::make(Input::all(),$roles,$sms);
+        if($validasi->fails()){
+            return redirect()->back()
+            ->withErrors($validasi)
+            ->withInput();
+        }
+
         $jabatan=Request::all();
         Jabatan::create($jabatan);
-        $jabatan=Jabatan::all();
         return redirect('jabatan');
     }
 
@@ -72,9 +87,32 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $jabatanUpdate=Request::all();
+        $jabatan=Jabatan::where('id', $id)->first();
+        if($jabatan['kode_jabatan'] != Request('kode_jabatan')){
+               $roles=['kode_jabatan' => 'required|unique:jabatans',
+                'nama_jabatan' => 'required','besaran_uang' =>'required'];
+        }
+        else{
+
+               $roles=['kode_jabatan' => 'required',
+                'nama_jabatan' => 'required','besaran_uang' =>'required'];
+        }
+         $sms=[
+            'kode_jabatan.required' => 'Wajib Diisi',
+            'kode_jabatan.unique' => 'Data Sudah Ada',
+            'nama_jabatan.required' => 'Wajib Diisi',
+            'besaran_uang.required' => 'Wajib Diisi',
+            ];
+        $validasi = Validator::make(Input::all(),$roles,$sms);
+        if($validasi->fails()){
+            return redirect()->back()
+            ->withErrors($validasi)
+            ->withInput();
+        }
+
+        $update=Request::all();
         $jabatan=Jabatan::find($id);
-        $jabatan->update($jabatanUpdate);
+        $jabatan->update($update);
         return redirect('jabatan');
     }
 
